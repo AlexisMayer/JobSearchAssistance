@@ -83,7 +83,6 @@ get = function(mc,id) {
           str_extract("[[:digit:]].*$") %>% 
           as.Date(format = "%d %B %Y")
       )
-    
     df$entreprise = NA
     # Return 
     return(df)
@@ -91,46 +90,33 @@ get = function(mc,id) {
   # Get Linkedin data 
   scrap_linkedin = function(x) {
     link = paste0("https://www.linkedin.com/jobs/search/?geoId=105015875&keywords=", x,"&location=France&redirect=false&position=1&pageNum=0")
-    
     ffd$navigate(link)
     Sys.sleep(2)
-    
     webElem = ffd$findElement("css", "body")             
     webElem$sendKeysToElement(list(key = "end"))
     Sys.sleep(1)
-    
     webElem = ffd$findElement("css", "body")              
     webElem$sendKeysToElement(list(key = "end"))
     Sys.sleep(1)
-    
     webElem = ffd$findElement("css", "body")              
     webElem$sendKeysToElement(list(key = "end"))
     Sys.sleep(1)
-    
     webElem = ffd$findElement("css", "body")              
     webElem$sendKeysToElement(list(key = "end"))
     Sys.sleep(1)
-    
     webElem = ffd$findElement("css", "body")              
     webElem$sendKeysToElement(list(key = "end"))
     Sys.sleep(1)
-    
     html_data = ffd$getPageSource()[[1]]
-    
     ref = read_html(html_data) %>% 
       html_nodes("main > div > section > ul > li > a") %>% 
       html_attr("href")
-    
     df = tribble(~ "title", ~ "entreprise", ~ "localisation", ~ "desc", ~ "link", ~ "date")
-    
     for (i in seq_along(ref)) {
       ffd$navigate(ref[i])
-      
       html_data = ffd$getPageSource()[[1]]
-      
       all = read_html(html_data) %>% 
         html_nodes("main > section.core-rail")
-      
       df[i, 1] = html_nodes(all, "section.sub-nav-cta.global-alert-offset > div > div > h3") %>% html_text()
       df[i, 2] = html_nodes(all, "section.topcard > div.topcard__content > div.topcard__content-left > h3:nth-child(2) > span:nth-child(1)") %>% html_text()
       df[i, 3] = html_nodes(all, "section.sub-nav-cta.global-alert-offset > div > div > div > span") %>% html_text()
@@ -138,7 +124,6 @@ get = function(mc,id) {
       df[i, 5] = ref[i]
       df[i, 6] = html_nodes(all, "section.topcard > div.topcard__content > div.topcard__content-left > h3:nth-child(3) > span.topcard__flavor--metadata.posted-time-ago__text") %>% html_text()
     }
-    
     # Process date
     df = df %>% 
       mutate_at(
@@ -152,7 +137,6 @@ get = function(mc,id) {
             else if (str_detect(x, "mois")) {Sys.Date() - 30 * as.numeric(str_extract(x, "[[:digit:]]"))}
           })
       )
-    
     # Return 
     return(df)
   }

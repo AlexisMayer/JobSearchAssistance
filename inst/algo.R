@@ -50,15 +50,12 @@ algo = function(id) {
     # Prep all 
     fn = bind_rows(df, unscore)
     fnp = prep_xgb(fn)
-    
     # Isolate scored and unscored
     fn_l = fnp[1:nrow(df),]
     fn_p = fnp[(nrow(df)+1):nrow(fnp),]
     fn_labels = as.matrix(fn[, 'note'])[1:nrow(df)]
-    
     # Coerce
     fn_xgb = xgb.DMatrix(data = fn_l, label = fn_labels, missing = NA)
-    
     # XGB model 
     mod = xgboost(
       data = fn_xgb,
@@ -68,15 +65,12 @@ algo = function(id) {
       max.depth = 6,
       nthread = 6,
       nrounds = 20)
-    
     # Get predictions
     pred = predict(mod, newdata = fn_p, missing = NA)
     binpred = ifelse(pred > 0.5, 1, 0)
-    
     # Merge
     unscore$score_pred = pred
     unscore$note_pred = binpred
-    
     # Return
     return(unscore)
   }

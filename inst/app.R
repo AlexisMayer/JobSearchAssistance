@@ -46,9 +46,7 @@ app = function(id) {
     filter(!duplicated(link)) %>% 
     filter(!duplicated(desc)) %>% 
     write_csv(paste0(paste0("data/get/", id,"score/score.csv")))
-  
   # AMELIORATION DU FRONT END 
-  
   # # Appli
   # shinyApp(
   #   # UI side

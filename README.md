@@ -1,6 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # JobSearchAssistance
 
 The user benefit from an artificial intelligence to assist him in his
