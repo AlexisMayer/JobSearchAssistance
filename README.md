@@ -22,12 +22,10 @@ The project is divided into three phases:
 ## Identify research using keywords
 
 ``` r
-## Réssources
 lapply(list.files("inst/", full.names = T), source)
 ```
 
 ``` r
-## Inputs
 params = list(
   user_id   = "tintin",
   mots_cles = c("data+scientist", "Statisticien")
