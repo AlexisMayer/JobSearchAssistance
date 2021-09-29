@@ -1,4 +1,6 @@
 get = function(mc,id) {
+  # Better ? 
+  ## require(Rlinkedin) ## \!/
   # Library
   require(tidyverse)
   require(rvest)
@@ -180,11 +182,6 @@ get = function(mc,id) {
     filter(!str_detect(title, "bio|Bio|BIO|MÉD|ALT|Stage|STG|Stagiaire|STAGE|Alternance"))
   # Save it 
   write_csv(new, paste0(paste0("data/get/", id, "/"), Sys.Date(),".csv"))
-}
-get = function(mc,id) {
-  require(Rlinkedin)
-  in.auth = inOAuth()
-  
 }
 app = function(id) {
   # Library
@@ -397,8 +394,3 @@ algo = function(id) {
   # Do it 
   # xgb_test(df)
 }
-
-
-
-
-
