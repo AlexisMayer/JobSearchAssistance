@@ -12,46 +12,47 @@ know your preferences.
 
 The project is divided into three phases:
 
-  - Data collection using web scrapping with the get() custom function.
+  - Data collection using web scrapping with the get() function.
   - The app() function allows you to swap and classify the offers.
   - Finally, the algo() function analyze the remaining offers and
-    predict a sensitivity
-score.
+    predict a sensitivity score.
 
-# Identifier la recherche grâce à des mots clés (Intitulé du poste + type de contrat + zone)
+# Application
+
+## Identify research using keywords
 
 ``` r
-# Réssources
+## Réssources
 lapply(list.files("inst/", full.names = T), source)
 ```
 
 ``` r
-# Inputs
+## Inputs
 params = list(
   user_id   = "tintin",
   mots_cles = c("data+scientist", "Statisticien")
   )
 ```
 
-# Scraper une liste d’offres
+## Scrape a list of offers
 
 ``` r
 get(mc = params$mots_cles, id = params$user_id)
 ```
 
-# Classer manuelement (swap) les offres
+## Manually classify (swap) the offers
 
 ``` r
 app(id = params$user_id)
 ```
 
-# Apprendre du résultat et prédir la classification des non classés
+## Learn from the result and predict the classification of unclassified
 
 ``` r
 algo(id = params$user_id)
 ```
 
-# Proposer les offres les plus succeptible de plaire
+## Offer the most likely to please offers
 
 ``` r
 read_rds("data/top/prev.RDS") %>% 
