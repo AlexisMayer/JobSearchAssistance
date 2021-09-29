@@ -1,0 +1,71 @@
+---
+output: github_document
+---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# JobSearchAssistance
+
+The user benefit from an artificial intelligence to assist him in his job search or paid assignments.
+
+The tool allows you to collect, analyze and classify job offers according to your own tastes. 
+Matching an offer allows the algorithm to know your preferences.
+
+The project is divided into three phases:
+
+  + Data collection using web scrapping with the get() custom function.
+  + The app() function allows you to swap and classify the offers. 
+  + Finally, the algo() function analyze the remaining offers and predict a sensitivity score.
+
+# Identifier la recherche grâce à des mots clés (Intitulé du poste + type de contrat + zone)
+
+```{r eval = FALSE}
+# Réssources
+lapply(list.files("inst/", full.names = T), source)
+```
+
+```{r eval = FALSE}
+# Inputs
+params = list(
+  user_id   = "tintin",
+  mots_cles = c("data+scientist", "Statisticien")
+  )
+```
+
+# Scraper une liste d'offres
+
+```{r eval = FALSE}
+get(mc = params$mots_cles, id = params$user_id)
+```
+
+# Classer manuelement (swap) les offres
+
+```{r eval = FALSE}
+app(id = params$user_id)
+```
+
+# Apprendre du résultat et prédir la classification des non classés
+
+```{r eval = FALSE}
+algo(id = params$user_id)
+```
+
+# Proposer les offres les plus succeptible de plaire
+
+```{r include=FALSE}
+require(tidyverse)
+```
+
+```{r}
+read_rds("data/top/prev.RDS") %>% 
+  slice_head(n = 10)
+```
+
+
