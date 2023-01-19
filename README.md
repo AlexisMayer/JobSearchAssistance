@@ -1,23 +1,19 @@
 
-# JobSearchAssistance
+Assistant de recherche d'emploi
+L'utilisateur bénéficie d'une intelligence artificielle pour l'aider dans sa recherche d'emploi ou de missions rémunérées.
 
-The user benefit from an artificial intelligence to assist him in his
-job search or paid assignments.
+L'outil permet de collecter, analyser et classer les offres d'emploi selon ses propres goûts. Correspondre à une offre permet à l'algorithme de connaître vos préférences.
 
-The tool allows you to collect, analyze and classify job offers
-according to your own tastes. Matching an offer allows the algorithm to
-know your preferences.
+Le projet est divisé en trois phases :
 
+- Collecte de données en utilisant le web scraping avec la fonction get().
+- La fonction app() permet de faire des glisser-déposer et de classer les offres.
+- Enfin, la fonction algo() analyse les offres restantes et prédit un score de sensibilité.
 The project is divided into three phases:
-
-  - Data collection using web scrapping with the get() function.
-  - The app() function allows you to swap and classify the offers.
-  - Finally, the algo() function analyze the remaining offers and
-    predict a sensitivity score.
 
 # Application
 
-## Identify research using keywords
+## Identification de la recherche à l'aide de mots clés
 
 ``` r
 lapply(list.files("inst/", full.names = T), source)
@@ -30,25 +26,25 @@ params = list(
   )
 ```
 
-## Scrape a list of offers
+## Scraper une liste d'offres
 
 ``` r
 get(mc = params$mots_cles, id = params$user_id)
 ```
 
-## Manually classify (swap) the offers
+## Classification manuelle (glisser-déposer) des offres
 
 ``` r
 app(id = params$user_id)
 ```
 
-## Learn from the result and predict the classification of unclassified
+## Apprendre des résultats et prédire la classification des non classifiés
 
 ``` r
 algo(id = params$user_id)
 ```
 
-## Offer the most likely to please offers
+## Restituer les offres les plus susceptibles de plaire
 
 ``` r
 read_rds("data/top/prev.RDS") %>% 
