@@ -1,3 +1,14 @@
+#' Title: Prédiction de score de données non étiquetées
+#' 
+#' Description: La fonction algo utilise un modèle de boosting XGBoost pour prédire le score de données non étiquetées en utilisant des données étiquetées précédemment obtenues.
+#' 
+#' @param id: L'identifiant de l'utilisateur pour accéder aux données étiquetées et non étiquetées.
+#' 
+#' @examples
+#' id <- "123456"
+#' algo(id)
+#' 
+#' @export
 algo = function(id) {
   # Library
   require(tidyverse)
