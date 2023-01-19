@@ -1,3 +1,14 @@
+#' Title: Application Shiny pour l'évaluation et l'édition de données d'emploi
+#' 
+#' Description: La fonction app lance une application Shiny qui permet à l'utilisateur de visualiser et d'évaluer les offres d'emploi obtenues à l'aide de la fonction get en utilisant un système de "swipe" similaire à celui des applications de rencontre. Les données évaluées et éditées sont ensuite sauvegardées pour être utilisées pour entraîner un modèle de machine learning.
+#' 
+#' @param id: L'identifiant de l'utilisateur pour accéder aux données obtenues avec la fonction get.
+#' 
+#' @examples
+#' id <- "123456"
+#' app(id)
+#' 
+#' @export
 app = function(id) {
   # Library
   require(tidyverse)
@@ -46,38 +57,4 @@ app = function(id) {
     filter(!duplicated(link)) %>% 
     filter(!duplicated(desc)) %>% 
     write_csv(paste0(paste0("data/get/", id,"score/score.csv")))
-  # AMELIORATION DU FRONT END 
-  # # Appli
-  # shinyApp(
-  #   # UI side
-  #   ui = fluidPage(
-  #     titlePanel("Emploi-R"),
-  #     sidebarLayout(
-  #       sidebarPanel(width = "100%", textOutput("nText"), br(),
-  #         div(
-  #           div(actionButton("No", "no", style = "text-align: center;"),
-  #               style = "display:inline-block; vertical-align:top;"),
-  #           div(" - ", style = "display:inline-block; vertical-align:top;"),
-  #           div(actionButton("Yes", "yes", style = "text-align: center;"), 
-  #               style = "display:inline-block; vertical-align:top;"),
-  #           style = "display: block; margin-left: auto; margin-right: auto;"
-  #         ),
-  #         br(),
-  #         actionButton("Next", "next", style = "text-align: center;"),
-  #         style = "text-align: center; display: block;"
-  #       ),
-  #       mainPanel()
-  #     )
-  #   ),
-  #   # Server side
-  #   server = function(input, output, session) {
-  #     values = reactiveValues()
-  #     values$count = 0
-  #     ntext = eventReactive(input$Next, {
-  #       values$count = values$count + 1
-  #       return(df$desc[values$count])
-  #     })
-  #     output$nText = renderText({ ntext() })  
-  #   }
-  # )
 }
