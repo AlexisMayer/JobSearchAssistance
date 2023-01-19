@@ -1,5 +1,6 @@
 
-Assistant de recherche d'emploi
+# Assistant de recherche d'emploi
+
 L'utilisateur bénéficie d'une intelligence artificielle pour l'aider dans sa recherche d'emploi ou de missions rémunérées.
 
 L'outil permet de collecter, analyser et classer les offres d'emploi selon ses propres goûts. Correspondre à une offre permet à l'algorithme de connaître vos préférences.
