@@ -1,3 +1,16 @@
+#' Title: Scraping de données de pole emploi
+#' 
+#' Description: La fonction get permet de récupérer les offres d'emploi disponibles sur le site de pole emploi en utilisant les mots clés donnés en paramètre.
+#' 
+#' @param mc: Les mots clés à utiliser pour la recherche d'offres d'emploi.
+#' @param id: L'identifiant de l'utilisateur pour utiliser Selenium.
+#' 
+#' @examples
+#' mc <- c("data", "scientist", "R")
+#' id <- "123456"
+#' get(mc, id)
+#' 
+#' @export
 get = function(mc,id) {
   # Better ? 
   ## require(Rlinkedin) ## \!/
